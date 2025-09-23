@@ -81,7 +81,7 @@ botonEnviar.addEventListener("click", () => {
         mensaje += `- ${p.nombre}: ${p.descripcion}\n`;
     });
 
-    const numero = "5491126569206"; 
+    const numero = "5491165919418"; 
 
     const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
 
