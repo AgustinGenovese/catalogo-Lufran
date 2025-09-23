@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Cargar Producto</title>
+  <link rel="stylesheet" href="/css/estilos.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    .contenedor {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .columna {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 50px;
+      margin-left: 50px;
+    }
+
+    form {
+      max-width: 400px;
+      width: 100%;
+      padding: 20px;
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    input,
+    textarea,
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    button {
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      margin-right: 40px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background: #f0f0f0;
+    }
+
+    button.eliminar {
+      background: #dc3545;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button.eliminar:hover {
+      background: #b52a37;
+    }
+
+    button:disabled {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Gestor de Productos</h1>
+
+  <div class="contenedor">
+    <div class="columna">
+      <form id="formProducto" action="/api/productos" method="POST">
+        <div>
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" name="nombre" required>
+        </div>
+
+        <div>
+          <label for="descripcion">Descripción:</label>
+          <textarea id="descripcion" name="descripcion"></textarea>
+        </div>
+
+        <div>
+          <label for="imagen">URL de la imagen:</label>
+          <input type="url" id="imagen" name="imagen" placeholder="http://...">
+        </div>
+
+        <div>
+          <label for="categoria">Categoría:</label>
+          <input type="text" id="categoria" name="categoria" required>
+        </div>
+
+        <div>
+          <button id="btnAgregar" type="submit">Agregar</button>
+          <button id="btnAceptar" type="button" disabled>Aceptar</button>
+        </div>
+
+        <p style="margin: 15px;">
+          <a href="/" class="btn-link">Volver al inicio</a>
+        </p>
+        <p>
+          <a href="/logout" class="btn-link">Cerrar sesión</a>
+        </p>
+      </form>
+    </div>
+
+    <div class="columna">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Categoría</th>
+            <th>Imagen</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="productosBody">
+          <!-- Productos se insertan aquí -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const form = document.querySelector('#formProducto');
+    const btnAgregar = document.getElementById('btnAgregar');
+    const btnAceptar = document.getElementById('btnAceptar');
+
+    const cargarProductos = () => {
+      fetch('/api/productos')
+        .then(res => res.json())
+        .then(productos => {
+          const tbody = document.getElementById('productosBody');
+          tbody.innerHTML = ''; // Limpiar tabla
+
+          productos.forEach(producto => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td>${producto.nombre}</td>
+              <td>${producto.descripcion || ''}</td>
+              <td>${producto.categoria}</td>
+              <td><img src="${producto.imagen || '/img/no-image.png'}" alt="${producto.nombre}" style="width:50px;height:50px;object-fit:cover;"></td>
+              <td>
+                <button class="editar" data-id="${producto._id}">Editar</button>
+                <button class="eliminar" data-id="${producto._id}">Eliminar</button>
+              </td>
+            `;
+            tbody.appendChild(tr);
+          });
+
+          // Evento eliminar
+          document.querySelectorAll('button.eliminar').forEach(btn => {
+            btn.addEventListener('click', () => {
+              const id = btn.getAttribute('data-id');
+              fetch(`/api/productos/${id}`, { method: 'DELETE' })
+                .then(res => res.json())
+                .then(() => cargarProductos())
+                .catch(err => console.error(err));
+            });
+          });
+
+          // Evento editar
+          document.querySelectorAll('button.editar').forEach(btn => {
+            btn.addEventListener('click', () => {
+              const id = btn.getAttribute('data-id');
+              fetch(`/api/productos/id/${id}`)
+                .then(res => res.json())
+                .then(producto => {
+                  // Llenar formulario
+                  document.getElementById('nombre').value = producto.nombre;
+                  document.getElementById('descripcion').value = producto.descripcion || '';
+                  document.getElementById('imagen').value = producto.imagen || '';
+                  document.getElementById('categoria').value = producto.categoria;
+
+                  // Input oculto con ID
+                  let hiddenId = document.getElementById('productoId');
+                  if (!hiddenId) {
+                    hiddenId = document.createElement('input');
+                    hiddenId.type = 'hidden';
+                    hiddenId.id = 'productoId';
+                    hiddenId.name = 'id';
+                    form.appendChild(hiddenId);
+                  }
+                  hiddenId.value = producto._id;
+
+                  // Cambiar estado botones
+                  btnAgregar.disabled = true;
+                  btnAceptar.disabled = false;
+                })
+                .catch(err => console.error(err));
+            });
+          });
+        });
+    };
+
+    // Evento aceptar (update)
+    btnAceptar.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = document.getElementById('productoId').value;
+
+      const data = {
+        nombre: document.getElementById('nombre').value,
+        descripcion: document.getElementById('descripcion').value,
+        imagen: document.getElementById('imagen').value,
+        categoria: document.getElementById('categoria').value
+      };
+
+      fetch(`/api/productos/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+        .then(res => res.json())
+        .then(() => {
+          // Reset formulario
+          form.reset();
+          document.getElementById('productoId').remove();
+
+          // Volver estado botones
+          btnAgregar.disabled = false;
+          btnAceptar.disabled = true;
+
+          cargarProductos();
+        })
+        .catch(err => console.error(err));
+    });
+
+    // Estado inicial de botones
+    btnAgregar.disabled = false;
+    btnAceptar.disabled = true;
+
+    cargarProductos();
+  </script>
+
+</body>
+
+</html>

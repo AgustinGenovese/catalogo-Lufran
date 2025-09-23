@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/estilos.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <aside>
+            <header>
+                <h1 class="logo">Lufran Muebleria</h1>
+            </header>
+            <nav>
+                <ul>
+                    <li>
+                        <a class="boton-menu boton-volver" href="/">
+                            <i class="bi bi-arrow-return-left"></i> Volver
+                        </a>
+                    </li>
+                    <li>
+                        <a class="boton-menu boton-favoritos active" href="/favoritos">
+                            <i class="bi bi-star"></i> Favoritos <span id="numerito" class="numerito">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <footer>
+                <p class="texto-footer">© 2025 Genovese Coder</p>
+            </footer>
+        </aside>
+        
+        <main>
+            <h2 class="titulo-principal">Favoritos</h2>
+            <div class="contenedor-favoritos">
+                <p id="favoritos-vacio" class="favoritos-vacio">Tus favoritos están vacíos <i class="bi bi-emoji-frown"></i></p>
+
+                <div id="favoritos-productos" class="favoritos-productos disabled">
+                    <!-- Esto se va a completar con el JS -->
+                </div>
+
+                <div id="favoritos-acciones" class="favoritos-acciones disabled">
+                    <div class="favoritos-acciones-izquierda">
+                        <button class="favoritos-acciones-vaciar">
+                            Vaciar Favoritos
+                        </button>
+                    </div>
+                    <div class="favoritos-acciones-derecha">
+                        <button class="favoritos-acciones-enviar">
+                            Solicitar Informacion
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/favoritos.js"></script>
+
+</body>
+
+</html>
