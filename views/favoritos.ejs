@@ -10,7 +10,18 @@
 
 <body>
     <div class="wrapper">
+
+        <header class="header-mobile">
+            <h1 class="logo">Lufran Muebleria</h1>
+            <button class="open-menu" id="open-menu">
+                <i class="bi bi-list"></i>
+            </button>
+        </header>
+
         <aside>
+            <button class="close-menu" id="close-menu">
+                <i class="bi bi-x"></i>
+            </button>
             <header>
                 <h1 class="logo">Lufran Muebleria</h1>
             </header>
@@ -33,11 +44,12 @@
                 <p class="texto-footer">© 2025 Genovese Coder</p>
             </footer>
         </aside>
-        
+
         <main>
             <h2 class="titulo-principal">Favoritos</h2>
             <div class="contenedor-favoritos">
-                <p id="favoritos-vacio" class="favoritos-vacio">Tus favoritos están vacíos <i class="bi bi-emoji-frown"></i></p>
+                <p id="favoritos-vacio" class="favoritos-vacio">Tus favoritos están vacíos <i
+                        class="bi bi-emoji-frown"></i></p>
 
                 <div id="favoritos-productos" class="favoritos-productos disabled">
                     <!-- Esto se va a completar con el JS -->
@@ -60,6 +72,7 @@
     </div>
 
     <script src="/js/favoritos.js"></script>
+    <script src="/js/menu.js"></script>
 
 </body>
 

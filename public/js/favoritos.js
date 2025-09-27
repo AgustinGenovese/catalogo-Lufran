@@ -28,7 +28,7 @@ function cargarFavoritos() {
                     <small>Título</small>
                     <h3>${producto.nombre}</h3>
                 </div>
-                <div class="favoritos-producto-cantidad">
+                <div class="favoritos-producto-descripcion">
                     <small>Descripción</small>
                     <p>${producto.descripcion}</p>
                 </div>
