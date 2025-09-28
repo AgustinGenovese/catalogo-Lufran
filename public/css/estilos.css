@@ -344,7 +344,7 @@ main {
     }
 
     .contenedor-productos {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
     }
 
     .header-mobile {
@@ -383,10 +383,6 @@ main {
         flex-wrap: wrap;
         justify-content: flex-start;
         padding: .5rem;
-    }
-
-    .favoritos-producto-descripcion {
-        display: none;
     }
 
     .favoritos-acciones {
