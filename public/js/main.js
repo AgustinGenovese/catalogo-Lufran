@@ -33,6 +33,9 @@ function cargarProductos(productosElegidos) {
           <div class="producto-detalles">
             <h3 class="producto-titulo">${producto.nombre}</h3>
             <p class="producto-descripcion">${producto.descripcion}</p>
+            <span style="display:inline-block; margin:1rem auto; text-align:center; background:#F9F8F4; color:#8C7A5B; padding:6px 12px; border-radius:10px; font-weight:600; font-size:1rem;">
+                $100.000
+            </span>
             <button class="producto-agregar" id="${producto._id}">
               Agregar a Favoritos
             </button>

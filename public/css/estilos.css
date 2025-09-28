@@ -1,11 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
 
+/* 
+  --clr-main: #8C7A5B;                          Opcion 1 
+  --clr-main-light: #CBBBA0; 
+  --clr-white: #F9F8F4;      
+  --clr-gray: #E2DED7;       
+  --clr-red: #9A3D2E;  
+
+  --clr-main: #4b33a8;                          Opcion violeta
+  --clr-main-light: #785ce9;
+  --clr-white: #ececec;
+  --clr-gray: #e2e2e2;
+  --clr-red: #961818;
+
+  --clr-main: #3C5A40;                          Opcion verde
+  --clr-main-light: #A6BBA2; 
+  --clr-white: #F8F7F3;      
+  --clr-gray: #E4E2DC;       
+  --clr-red: #7B3F00;      
+
+  --clr-main: #1D3557;                         Opcion azul claro
+  --clr-main-light: #457B9D; 
+  --clr-white: #FAF7F2;      
+  --clr-gray: #EAE6E1;       
+  --clr-red: #9E2A2B;    
+ */
+
 :root {
-    --clr-main: #4b33a8;
-    --clr-main-light: #785ce9;
-    --clr-white: #ececec;
-    --clr-gray: #e2e2e2;
-    --clr-red: #961818;
+    --clr-main: #8C7A5B;
+    --clr-main-light: #CBBBA0;
+    --clr-white: #F9F8F4;
+    --clr-gray: #E2DED7;
+    --clr-red: #9A3D2E;
 }
 
 * {
@@ -15,10 +41,20 @@
     font-family: 'Rubik', sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6, p, a, input, textarea, ul {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+input,
+textarea,
+ul {
     margin: 0;
     padding: 0;
-  }
+}
 
 ul {
     list-style-type: none;
@@ -103,8 +139,8 @@ aside {
     box-shadow: 0 -1rem 0 var(--clr-white);
 }
 
-.boton-menu > i.bi-hand-index-thumb-fill,
-.boton-menu > i.bi-hand-index-thumb {
+.boton-menu>i.bi-hand-index-thumb-fill,
+.boton-menu>i.bi-hand-index-thumb {
     transform: rotateZ(90deg);
 }
 
@@ -166,7 +202,7 @@ main {
 }
 
 .producto-titulo {
-    font-size: 1rem;
+    font-size: 1.10rem;
 }
 
 .producto-agregar {
@@ -267,7 +303,7 @@ main {
 }
 
 .disabled {
-  display: none;
+    display: none;
 }
 
 @media screen and (max-width: 600px) {

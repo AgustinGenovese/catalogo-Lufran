@@ -25,12 +25,12 @@ function cargarFavoritos() {
             div.innerHTML = `
                 <img class="favoritos-producto-imagen" src="${producto.imagen}" alt="${producto.nombre}">
                 <div class="favoritos-producto-titulo">
-                    <small>Título</small>
                     <h3>${producto.nombre}</h3>
                 </div>
                 <div class="favoritos-producto-descripcion">
-                    <small>Descripción</small>
-                    <p>${producto.descripcion}</p>
+                    <span style="display:inline-block; margin:1rem auto; text-align:center; background:#F9F8F4; color:#8C7A5B; padding:6px 12px; border-radius:10px; font-weight:600; font-size:1rem;">
+                        $100.000
+                    </span>
                 </div>
                 <button class="favoritos-producto-eliminar" id="${producto._id}">
                     <i class="bi bi-trash-fill"></i>
