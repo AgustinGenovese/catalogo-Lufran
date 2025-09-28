@@ -52,7 +52,7 @@ function cargarProductos(productosElegidos) {
     const botonesInformacion = document.querySelectorAll(".producto-informacion");
     botonesInformacion.forEach(boton => {
         boton.addEventListener("click", () => {
-            let mensaje = "Hola! Me interesa recibir más información sobre este producto:\n";
+            let mensaje = "Hola! Me interesa recibir más información sobre este producto:\n\n";
             mensaje += `- ${productosElegidos.find(p => p._id === boton.id).nombre}\n`;
 
             const numero = "5491165919418";
