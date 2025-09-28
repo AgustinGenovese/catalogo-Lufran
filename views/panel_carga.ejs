@@ -147,6 +147,11 @@
         </div>
 
         <div>
+          <label for="precio">Precio:</label>
+          <input type="text" id="precio" name="precio" required>
+        </div>
+
+        <div>
           <button id="btnAgregar" type="submit">Agregar</button>
           <button id="btnAceptar" type="button" disabled>Aceptar</button>
         </div>
@@ -167,6 +172,7 @@
             <th>Nombre</th>
             <th>Descripción</th>
             <th>Categoría</th>
+            <th>Precio</th>
             <th>Imagen</th>
             <th>Acciones</th>
           </tr>
@@ -196,6 +202,7 @@
               <td>${producto.nombre}</td>
               <td>${producto.descripcion || ''}</td>
               <td>${producto.categoria}</td>
+              <td>${producto.precio}</td>
               <td><img src="${producto.imagen || '/img/no-image.png'}" alt="${producto.nombre}" style="width:50px;height:50px;object-fit:cover;"></td>
               <td>
                 <button class="editar" data-id="${producto._id}">Editar</button>
@@ -228,6 +235,8 @@
                   document.getElementById('descripcion').value = producto.descripcion || '';
                   document.getElementById('imagen').value = producto.imagen || '';
                   document.getElementById('categoria').value = producto.categoria;
+                  document.getElementById('precio').value = producto.precio;
+
 
                   // Input oculto con ID
                   let hiddenId = document.getElementById('productoId');
@@ -259,7 +268,8 @@
         nombre: document.getElementById('nombre').value,
         descripcion: document.getElementById('descripcion').value,
         imagen: document.getElementById('imagen').value,
-        categoria: document.getElementById('categoria').value
+        categoria: document.getElementById('categoria').value,
+        precio: document.getElementById('precio').value
       };
 
       fetch(`/api/productos/${id}`, {

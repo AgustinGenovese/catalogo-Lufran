@@ -2,13 +2,14 @@ const Producto = require("../models/Producto");
 
 const crearProducto = async (req, res) => {
   try {
-    const { nombre, descripcion, imagen, categoria } = req.body;
+    const { nombre, descripcion, imagen, categoria, precio } = req.body;
 
     const nuevoProducto = new Producto({
       nombre,
       descripcion,
       imagen,
-      categoria
+      categoria,
+      precio
     });
 
     await nuevoProducto.save();
@@ -49,11 +50,11 @@ const obtenerProductoPorId = async (req, res) => {
 const actualizarProducto = async (req, res) => {
   try {
     const { id } = req.params;
-    const { nombre, descripcion, imagen, categoria } = req.body;
+    const { nombre, descripcion, imagen, categoria, precio } = req.body;
 
     const productoActualizado = await Producto.findByIdAndUpdate(
       id,
-      { nombre, descripcion, imagen, categoria },
+      { nombre, descripcion, imagen, categoria, precio },
       { new: true } // devuelve el objeto ya actualizado
     );
 

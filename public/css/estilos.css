@@ -205,6 +205,30 @@ main {
     font-size: 1.10rem;
 }
 
+.producto-precio {
+    display:inline-block; 
+    margin:1rem auto; 
+    text-align:center; 
+    background:#F9F8F4; 
+    color:#8C7A5B; 
+    padding:6px 12px; 
+    border-radius:10px; 
+    font-weight:600; 
+    font-size:1rem;
+}
+
+.producto-informacion { 
+    border: 0;
+    background-color: var(--clr-white);
+    color: var(--clr-main);
+    padding: .4rem;
+    text-transform: uppercase;
+    border-radius: 2rem;
+    cursor: pointer;
+    border: 2px solid var(--clr-white);
+    transition: background-color .2s, color .2s;
+}
+
 .producto-agregar {
     border: 0;
     background-color: var(--clr-white);

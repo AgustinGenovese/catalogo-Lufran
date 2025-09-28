@@ -27,9 +27,9 @@ function cargarFavoritos() {
                 <div class="favoritos-producto-titulo">
                     <h3>${producto.nombre}</h3>
                 </div>
-                <div class="favoritos-producto-descripcion">
-                    <span style="display:inline-block; margin:1rem auto; text-align:center; background:#F9F8F4; color:#8C7A5B; padding:6px 12px; border-radius:10px; font-weight:600; font-size:1rem;">
-                        $100.000
+                <div class="favoritos-producto-precio">
+                    <span class="producto-precio">
+                    $${producto.precio}
                     </span>
                 </div>
                 <button class="favoritos-producto-eliminar" id="${producto._id}">
@@ -78,10 +78,10 @@ botonVaciar.addEventListener("click", () => {
 botonEnviar.addEventListener("click", () => {
     let mensaje = "Hola! Me interesa recibir más información sobre estos productos:\n\n";
     productosEnFavoritos.forEach(p => {
-        mensaje += `- ${p.nombre}: ${p.descripcion}\n`;
+        mensaje += `- ${p.nombre}\n`;
     });
 
-    const numero = "5491165919418"; 
+    const numero = "5491165919418";
 
     const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
 
