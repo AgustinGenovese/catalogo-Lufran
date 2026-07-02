@@ -11,6 +11,6 @@ router.post("/productos", protegerRuta, crearProducto);
 
 router.put("/productos/:id", protegerRuta, actualizarProducto);
 
-router.delete('/productos/:id', eliminarProducto);
+router.delete('/productos/:id', protegerRuta, eliminarProducto);
 
 module.exports = router;
