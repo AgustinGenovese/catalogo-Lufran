@@ -3,183 +3,239 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Cargar Producto</title>
+  <title>Panel — Lufran</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/estilos.css">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      padding: 20px;
-      margin-top: 40px;
-    }
-
-    .contenedor {
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-    }
-
-    .columna {
-      flex: 1;
-      display: flex;
-      justify-content: center;
+      background: var(--clr-white);
+      padding: 2rem;
     }
 
     h1 {
       text-align: center;
-      color: #333;
-      margin-bottom: 50px;
-      margin-left: 50px;
+      color: var(--clr-text);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      letter-spacing: -0.5px;
+    }
+
+    .panel-layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2rem;
+      align-items: start;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     form {
-      max-width: 400px;
-      width: 100%;
-      padding: 20px;
-      background: #fff;
-      border-radius: 6px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      background: var(--clr-card);
+      padding: 1.5rem;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
     }
 
-    label {
+    form label {
       display: block;
-      margin-bottom: 6px;
-      font-weight: bold;
-      color: #555;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--clr-text);
+      margin-bottom: 0.3rem;
     }
 
-    input,
-    textarea,
-    button {
+    form input,
+    form textarea {
       width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 14px;
+      padding: 0.65rem 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid var(--clr-gray);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      transition: var(--transition);
     }
 
-    button {
-      background: #007BFF;
-      color: #fff;
-      border: none;
+    form input:focus,
+    form textarea:focus {
+      outline: none;
+      border-color: var(--clr-main-light);
+      box-shadow: 0 0 0 3px rgba(184,145,101,0.15);
+    }
+
+    form textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .btn-group button {
+      flex: 1;
+      padding: 0.65rem;
+      border: 0;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.85rem;
       cursor: pointer;
+      transition: var(--transition);
     }
 
-    button:hover {
-      background: #0056b3;
+    #btnAgregar {
+      background: var(--clr-main);
+      color: #fff;
+    }
+    #btnAgregar:hover { background: #1a1a1a; }
+
+    #btnAceptar {
+      background: var(--clr-main-light);
+      color: #fff;
+    }
+    #btnAceptar:hover { background: #a37d55; }
+
+    #btnAgregar:disabled,
+    #btnAceptar:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
     }
 
-    p {
-      text-align: center;
+    .panel-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1.25rem;
+      font-size: 0.85rem;
     }
 
-    a {
-      color: #007BFF;
-      text-decoration: none;
+    .panel-links a {
+      color: var(--clr-text-light);
+      transition: var(--transition);
+    }
+    .panel-links a:hover {
+      color: var(--clr-text);
     }
 
-    a:hover {
-      text-decoration: underline;
+    .table-wrap {
+      background: var(--clr-card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow-x: auto;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      background: #fff;
-      margin-right: 40px;
-    }
-
-    th,
-    td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: left;
+      font-size: 0.85rem;
     }
 
     th {
-      background: #f0f0f0;
+      text-align: left;
+      padding: 0.75rem 1rem;
+      background: var(--clr-gray);
+      color: var(--clr-text);
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
+
+    td {
+      padding: 0.65rem 1rem;
+      border-bottom: 1px solid var(--clr-gray);
+      color: var(--clr-text);
+    }
+
+    td img {
+      width: 44px;
+      height: 44px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .acciones {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .acciones button {
+      padding: 0.4rem 0.75rem;
+      border: 0;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    button.editar {
+      background: var(--clr-gray);
+      color: var(--clr-text);
+    }
+    button.editar:hover { background: #d6d0c8; }
 
     button.eliminar {
-      background: #dc3545;
+      background: var(--clr-red);
       color: #fff;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 4px;
-      cursor: pointer;
     }
+    button.eliminar:hover { background: #c23d3d; }
 
-    button.eliminar:hover {
-      background: #b52a37;
-    }
-
-    button:disabled {
-      display: none;
+    @media (max-width: 768px) {
+      body { padding: 1rem; }
+      .panel-layout { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 
 <body>
-  <h1>Gestor de Productos</h1>
+  <h1>Gestión de Productos</h1>
 
-  <div class="contenedor">
-    <div class="columna">
+  <div class="panel-layout">
+    <div>
       <form id="formProducto" action="/api/productos" method="POST">
-        <div>
-          <label for="nombre">Nombre:</label>
-          <input type="text" id="nombre" name="nombre" required>
-        </div>
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" required>
 
-        <div>
-          <label for="descripcion">Descripción:</label>
-          <textarea id="descripcion" name="descripcion"></textarea>
-        </div>
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" name="descripcion"></textarea>
 
-        <div>
-          <label for="imagen">URL de la imagen:</label>
-          <input type="url" id="imagen" name="imagen" placeholder="http://...">
-        </div>
+        <label for="imagen">URL de imagen</label>
+        <input type="url" id="imagen" name="imagen" placeholder="https://...">
 
-        <div>
-          <label for="categoria">Categoría:</label>
-          <input type="text" id="categoria" name="categoria" required>
-        </div>
+        <label for="categoria">Categoría</label>
+        <input type="text" id="categoria" name="categoria" required>
 
-        <div>
-          <label for="precio">Precio:</label>
-          <input type="text" id="precio" name="precio" required>
-        </div>
+        <label for="precio">Precio</label>
+        <input type="text" id="precio" name="precio" required>
 
-        <div>
+        <div class="btn-group">
           <button id="btnAgregar" type="submit">Agregar</button>
           <button id="btnAceptar" type="button" disabled>Aceptar</button>
         </div>
 
-        <p style="margin: 15px;">
-          <a href="/" class="btn-link">Volver al inicio</a>
-        </p>
-        <p>
-          <a href="/logout" class="btn-link">Cerrar sesión</a>
-        </p>
+        <div class="panel-links">
+          <a href="/">← Volver al inicio</a>
+          <a href="/logout">Cerrar sesión</a>
+        </div>
       </form>
     </div>
 
-    <div class="columna">
+    <div class="table-wrap">
       <table>
         <thead>
           <tr>
             <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Categoría</th>
+            <th>Cat.</th>
             <th>Precio</th>
-            <th>Imagen</th>
+            <th>Img</th>
             <th>Acciones</th>
           </tr>
         </thead>
-        <tbody id="productosBody">
-          <!-- Productos se insertan aquí -->
-        </tbody>
+        <tbody id="productosBody"></tbody>
       </table>
     </div>
   </div>
@@ -194,25 +250,25 @@
         .then(res => res.json())
         .then(productos => {
           const tbody = document.getElementById('productosBody');
-          tbody.innerHTML = ''; // Limpiar tabla
+          tbody.innerHTML = '';
 
           productos.forEach(producto => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
               <td>${producto.nombre}</td>
-              <td>${producto.descripcion || ''}</td>
               <td>${producto.categoria}</td>
-              <td>${producto.precio}</td>
-              <td><img src="${producto.imagen || '/img/no-image.png'}" alt="${producto.nombre}" style="width:50px;height:50px;object-fit:cover;"></td>
+              <td>$${producto.precio}</td>
+              <td><img src="${producto.imagen || ''}" alt="${producto.nombre}"></td>
               <td>
-                <button class="editar" data-id="${producto._id}">Editar</button>
-                <button class="eliminar" data-id="${producto._id}">Eliminar</button>
+                <div class="acciones">
+                  <button class="editar" data-id="${producto._id}">Editar</button>
+                  <button class="eliminar" data-id="${producto._id}">Eliminar</button>
+                </div>
               </td>
             `;
             tbody.appendChild(tr);
           });
 
-          // Evento eliminar
           document.querySelectorAll('button.eliminar').forEach(btn => {
             btn.addEventListener('click', () => {
               const id = btn.getAttribute('data-id');
@@ -223,22 +279,18 @@
             });
           });
 
-          // Evento editar
           document.querySelectorAll('button.editar').forEach(btn => {
             btn.addEventListener('click', () => {
               const id = btn.getAttribute('data-id');
               fetch(`/api/productos/id/${id}`)
                 .then(res => res.json())
                 .then(producto => {
-                  // Llenar formulario
                   document.getElementById('nombre').value = producto.nombre;
                   document.getElementById('descripcion').value = producto.descripcion || '';
                   document.getElementById('imagen').value = producto.imagen || '';
                   document.getElementById('categoria').value = producto.categoria;
                   document.getElementById('precio').value = producto.precio;
 
-
-                  // Input oculto con ID
                   let hiddenId = document.getElementById('productoId');
                   if (!hiddenId) {
                     hiddenId = document.createElement('input');
@@ -249,7 +301,6 @@
                   }
                   hiddenId.value = producto._id;
 
-                  // Cambiar estado botones
                   btnAgregar.disabled = true;
                   btnAceptar.disabled = false;
                 })
@@ -259,7 +310,6 @@
         });
     };
 
-    // Evento aceptar (update)
     btnAceptar.addEventListener('click', (e) => {
       e.preventDefault();
       const id = document.getElementById('productoId').value;
@@ -279,20 +329,15 @@
       })
         .then(res => res.json())
         .then(() => {
-          // Reset formulario
           form.reset();
           document.getElementById('productoId').remove();
-
-          // Volver estado botones
           btnAgregar.disabled = false;
           btnAceptar.disabled = true;
-
           cargarProductos();
         })
         .catch(err => console.error(err));
     });
 
-    // Estado inicial de botones
     btnAgregar.disabled = false;
     btnAceptar.disabled = true;
 
