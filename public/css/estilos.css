@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-    --clr-main: #2C2C2C;
-    --clr-main-light: #B89165;
-    --clr-white: #F5F0EB;
+    --clr-main: #3D2B1F;
+    --clr-main-light: #C87A4A;
+    --clr-white: #F5F0E8;
     --clr-card: #FFFFFF;
     --clr-gray: #E8E3DC;
-    --clr-red: #D94A4A;
-    --clr-text: #1E1E1E;
+    --clr-red: #C04545;
+    --clr-text: #1C1C1C;
     --clr-text-light: #6B6B6B;
     --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
     --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
@@ -216,7 +216,7 @@ main {
 }
 
 .producto-agregar:hover {
-    background: #1a1a1a;
+    background: #2A1E14;
 }
 
 /** Favoritos **/
@@ -325,7 +325,7 @@ main {
 }
 
 .favoritos-acciones-enviar:hover {
-    background: #1a1a1a;
+    background: #2A1E14;
 }
 
 .header-mobile {
