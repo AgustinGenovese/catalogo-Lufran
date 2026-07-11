@@ -1,5 +1,7 @@
 import { chromium } from 'playwright';
 import path from 'path';
+import fs from 'fs';
+import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -185,5 +187,33 @@ main()
   .finally(async () => {
     if (context) await context.close();
     if (browser) await browser.close();
-    console.log('Video guardado en:', VIDEO_DIR);
+
+    /* Esperar a que el video termine de escribirse */
+    await sleep(500);
+
+    /* Buscar el .webm más reciente */
+    const files = fs.readdirSync(VIDEO_DIR)
+      .filter(f => f.endsWith('.webm'))
+      .map(f => ({ name: f, time: fs.statSync(path.join(VIDEO_DIR, f)).mtimeMs }))
+      .sort((a, b) => b.time - a.time);
+
+    if (files.length === 0) {
+      console.log('No se encontró video.');
+      return;
+    }
+
+    const webm = path.join(VIDEO_DIR, files[0].name);
+    const mp4 = webm.replace('.webm', '.mp4');
+
+    try {
+      console.log('Convirtiendo a MP4...');
+      execSync(`ffmpeg -y -i "${webm}" -c:v libx264 -preset fast -crf 22 -pix_fmt yuv420p "${mp4}"`, {
+        stdio: 'ignore',
+        timeout: 30000,
+      });
+      fs.unlinkSync(webm);
+      console.log('Video listo:', mp4);
+    } catch {
+      console.log('No se pudo convertir (falta ffmpeg?), el .webm igual está en:', webm);
+    }
   });
